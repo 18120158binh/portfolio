@@ -66,7 +66,9 @@ Compiles and minifies for production
 ```shell
 $ npm run build
 ```
-
+Error: error:0308010C:digital envelope routines::unsupported
+Đây là lỗi phổ biến khi chạy Webpack (hoặc các công cụ build như vue-cli, react-scripts) với Node.js v17 hoặc v18+, do OpenSSL 3.0 thay đổi cơ chế mã hóa.
+export NODE_OPTIONS=--openssl-legacy-provider
 ---
 
 ## Features 

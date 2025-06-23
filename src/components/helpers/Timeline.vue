@@ -14,39 +14,53 @@
             {{ data.title }}
           </p>
           <ul
-            class="timeline m-0 pt-1"
-            v-for="(e, idx) in data.data"
-            :key="e.name"
-            :style="{ 'transition-delay': idx / 4.2 + 's' }"
-            data-aos="fade-up"
-            data-offset="10"
-            data-aos-once="true"
-            data-aos-easing="ease-in-out"
-            data-aos-mirror="true"
-            data-aos-duration="500"
-          >
-            <li class="m-0 pb-2">
-              <div>
-                <div class="px-2 title2">{{ e.name }}, {{ e.place }}</div>
-                <div class="px-2 title3">
-                  {{ e.degree || e.position }}
-                  {{ e.gpa ? "(" + e.gpa + ")" : "" }}
-                </div>
-                <div class="px-2 date">{{ e.date }}</div>
-                <div class="px-2 pb-2 pt-2" style="text-align: justify;">
-                  {{ e.description }}
-                </div>
-                <span
-                  class="mx-2 badge p-2 mb-2"
-                  v-for="s in e.skills"
-                  :key="s"
-                  :class="{ 'bg-dark2': nightMode }"
-                  >{{ s }}</span
-                >
-                <p class="m-2"></p>
-              </div>
-            </li>
-          </ul>
+  class="timeline m-0 pt-1"
+  v-for="(e, idx) in data.data"
+  :key="e.name"
+  :style="{ 'transition-delay': idx / 4.2 + 's' }"
+  data-aos="fade-up"
+  data-offset="10"
+  data-aos-once="true"
+  data-aos-easing="ease-in-out"
+  data-aos-mirror="true"
+  data-aos-duration="500"
+>
+  <li class="m-0 pb-2">
+    <div>
+      <div class="px-2 title2">{{ e.name }}, {{ e.place }}</div>
+      <div class="px-2 title3">
+        {{ e.degree || e.position }}
+        {{ e.gpa ? "(" + e.gpa + ")" : "" }}
+      </div>
+      <div class="px-2 date">{{ e.date }}</div>
+      <div class="px-2 pb-2 pt-2" style="text-align: justify;">
+        {{ e.description }}
+      </div>
+
+      <!-- 🔽 SUB ENTRIES -->
+      <div
+        class="px-3 pb-2"
+        v-if="e.sub && e.sub.length"
+        style="font-size: 14px;"
+      >
+        <ul>
+          <li v-for="(sub, subIdx) in e.sub" :key="subIdx">
+            <strong>{{ sub.title }}:</strong> {{ sub.description }}
+          </li>
+        </ul>
+      </div>
+
+      <span
+        class="mx-2 badge p-2 mb-2"
+        v-for="s in e.skills"
+        :key="s"
+        :class="{ 'bg-dark2': nightMode }"
+        >{{ s }}</span
+      >
+      <p class="m-2"></p>
+    </div>
+  </li>
+</ul>
         </div>
       </div>
     </div>
@@ -128,5 +142,15 @@ ul.timeline > li:before {
 
 .bg-dark2 {
   background-color: #3c4148 !important;
+}
+
+li > ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+li > ul > li {
+  margin-bottom: 0.5rem;
 }
 </style>

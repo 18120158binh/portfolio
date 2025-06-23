@@ -2,6 +2,7 @@
   <div
     :class="{ 'bg-white': !nightMode, 'bg-dark': nightMode }"
     class="pt-5 p-st"
+    :style="{ backgroundImage: `url(${picture})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '60vh' }"
   >
     <div
       class="container"
@@ -9,16 +10,16 @@
       data-aos-once="true"
       data-aos-duration="1000"
     >
-      <div class="row align-items-center">
-        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 text-center">
-          <img :src="picture" />
-        </div>
-        <div class="col-xl-6 col-bg-6 col-md-6 col-sm-12 pt-5">
+      <div class="row justify-content-center align-items-center text-center">
+        <div class="col-xl-8 col-bg-6 col-md-6 col-sm-12 pt-5 d-flex flex-column align-items-center text-center">
           <span
             class="home-title"
             :class="{ pgray: !nightMode, 'text-light': nightMode }"
-            >hello there!</span
+            >Welcome to my world!</span
           >
+          <div>
+            <p v-html="myself"></p>
+          </div>
           <div>
             <p v-html="description"></p>
           </div>
@@ -36,13 +37,6 @@
               v-tooltip.bottom="'GitHub'"
             >
               <i class="fab fa-github"></i>
-            </button>
-            <button
-              class="btn btn-outline-secondary mx-2"
-              @click="open('angellist')"
-              v-tooltip.bottom="'AngelList'"
-            >
-              <i class="fab fa-angellist"></i>
             </button>
             <button
               class="btn btn-outline-secondary mx-2"
@@ -77,10 +71,10 @@ export default {
     return {
       picture: info.flat_picture,
       description: info.description,
+      myself: info.myself,
       name: info.name,
       linkedin: info.links.linkedin,
       github: info.links.github,
-      angellist: info.links.angellist,
       resume: info.links.resume
     };
   },
@@ -92,9 +86,6 @@ export default {
           break;
         case "github":
           window.open(this.github, "_blank");
-          break;
-        case "angellist":
-          window.open(this.angellist, "_blank");
           break;
         case "resume":
           window.open(this.resume, "_blank");
